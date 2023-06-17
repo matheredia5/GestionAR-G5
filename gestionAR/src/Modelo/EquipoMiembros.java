@@ -2,6 +2,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import Modelo.Equipo;
 
 public class EquipoMiembros {
     private int idMiembroEq;
@@ -41,22 +42,22 @@ public class EquipoMiembros {
         this.fechaIncorporacion = fechaIncorporacion;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
+    public int getEquipo() {
+        return equipo.getIdEquipo();
     }
 
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
+    public void setEquipo(int idEquipo) {
+        this.equipo.setIdEquipo(idEquipo);
+    }
+   
+    public int getMiembro() {
+        return miembro.getIdMiembro();
     }
 
-    public Miembro getMiembro() {
-        return miembro;
+    public void setMiembro(int idMiembro) {
+        this.miembro.setIdMiembro(idMiembro);
     }
-
-    public void setMiembro(Miembro miembro) {
-        this.miembro = miembro;
-    }
-
+   
     @Override
     public String toString() {
         return "equipoMiembros{" + "idMiembroEq=" + idMiembroEq + ", fechaIncorporacion=" + fechaIncorporacion + ", equipo=" + equipo + ", miembro=" + miembro + '}';

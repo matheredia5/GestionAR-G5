@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 
 public class EquipoMiembrosData {
      private Connection con;
+     EquipoData equipData = new EquipoData();
+     MiembroData mData = new MiembroData();
     
     public EquipoMiembrosData(){
         con= Conexion.getConexion();
@@ -32,8 +34,8 @@ public class EquipoMiembrosData {
             PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                      
             ps.setDate(1, Date.valueOf(equipomiembros.getFechaIncorporacion()));
-            ps.setInt(2, equipomiembros.getEquipo().getIdEquipo());
-            ps.setInt(3, equipomiembros.getMiembro().getIdMiembro());
+            ps.setInt(2, equipomiembros.getEquipo());
+            ps.setInt(3, equipomiembros.getMiembro());
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -52,38 +54,37 @@ public class EquipoMiembrosData {
         }
     }
 
-    public EquipoMiembros obtenerMiembroEquipo(int idMiembroEq)
-        throws SQLException {
+    public EquipoMiembros obtenerMiembroEquipo(int idMiembroEq){         
             EquipoMiembros miembroEq = null;
-            String sql = "SELECT * FROM equipoMiembros WHERE idMiembroEq = ?";
+            String sql = "SELECT idMiembroEq, fechaIncorporacion FROM equipoMiembros WHERE idMiembroEq = ?";
 
             PreparedStatement ps = null;
-            ResultSet rs = null;
+           
 
             try {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, idMiembroEq);
-                rs = ps.executeQuery();
+                ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
                     miembroEq = new EquipoMiembros();
                     miembroEq.setIdMiembroEq(rs.getInt("idMiembroEq"));
                     miembroEq.setFechaIncorporacion(rs.getDate("fechaIncorporacion").toLocalDate());
-                    miembroEq.getEquipo().setIdEquipo(rs.getInt("idEquipo"));
-                    miembroEq.getMiembro().setIdMiembro(rs.getInt("idMiembro"));
-
+//                    Equipo eq = equipData.obtenerEquipo(rs.getInt("idEquipo"));
+//                    miembroEq.setEquipo(eq.getIdEquipo());
+//                    Miembro miem = mData.obtenerMiembro(rs.getInt("idMiembro"));
+//                    miembroEq.setMiembro(miem.getIdMiembro());
+                
+            } else {
+                
                 }
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            }
-
-            return miembroEq;
+                ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla miembro equipo "+ex.getMessage());
         }
+
+        return miembroEq;
+    } 
 
 
 }

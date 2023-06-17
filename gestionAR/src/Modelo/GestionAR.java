@@ -40,9 +40,11 @@ public class GestionAR {
         ComentariosData c = new ComentariosData();
 //        c.registrarComentario(com);
 
-        Tarea tar = new Tarea(7, "correcion completada", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), "completado", equipom);
+        Tarea tar = new Tarea(7, "correcion completada", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), "En Progeso", equipom);
         TareaData ta = new TareaData();
 //        t.actualizarTarea(tar);
+//        t.actualizarEstado("Completado", 4);
+          
     }
     
 }

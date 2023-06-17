@@ -72,12 +72,12 @@ public class Tarea {
         this.fechaCierre = fechaCierre;
     }
 
-    public EquipoMiembros getEquipoM() {
-        return equipoM;
+    public int getEquipoM() {
+        return equipoM.getIdMiembroEq();
     }
 
-    public void setEquipoM(EquipoMiembros equipoM) {
-        this.equipoM = equipoM;
+    public void setEquipoM(int idMiembroEq) {
+        this.equipoM.setIdMiembroEq(idMiembroEq);
     }
     
     public Proyecto getProyecto() {
@@ -100,7 +100,7 @@ public class Tarea {
     
     @Override
     public String toString() {
-        return  idTarea + "," + nombre ;
+        return  idTarea + " , " + nombre ;
     }
     
 }

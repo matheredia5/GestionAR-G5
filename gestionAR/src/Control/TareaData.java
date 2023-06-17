@@ -21,6 +21,9 @@ import javax.swing.JOptionPane;
 
 public class TareaData {
     private Connection con;
+    private EquipoMiembrosData EquipmData= new EquipoMiembrosData();
+    private EquipoData equipData = new EquipoData();
+    private MiembroData mData = new MiembroData();
     
     public TareaData(){
         con= Conexion.getConexion();
@@ -36,7 +39,7 @@ public class TareaData {
             ps.setDate(2, Date.valueOf(tarea.getFechaCreacion()));
             ps.setDate(3, Date.valueOf(tarea.getFechaCierre()));
             ps.setString(4, tarea.getEstado());
-            ps.setInt(5, tarea.getEquipoM().getIdMiembroEq());
+            ps.setInt(5, tarea.getEquipoM());
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
@@ -64,7 +67,7 @@ public class TareaData {
             ps.setDate(2, Date.valueOf( tarea.getFechaCreacion()));
             ps.setDate(3, Date.valueOf( tarea.getFechaCierre()));            
             ps.setString(4, tarea.getEstado());
-            ps.setInt(5, tarea.getEquipoM().getIdMiembroEq());
+            ps.setInt(5, tarea.getEquipoM());
             ps.setInt(6, tarea.getIdTarea());
             ps.executeUpdate();
             
@@ -96,7 +99,7 @@ public class TareaData {
               List<Tarea> tarea = new ArrayList<>();    
 
             try {
-                String query = "SELECT * FROM tarea";
+                String query = "SELECT idTarea, nombre FROM tarea;";
                 PreparedStatement ps;
                 ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
@@ -106,61 +109,23 @@ public class TareaData {
                     Tarea tar = new Tarea();
                     tar.setIdTarea(rs.getInt("idTarea"));
                     tar.setNombre(rs.getString("nombre"));
-                    tar.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
-                    tar.setFechaCierre(rs.getDate("fechaNaCierre").toLocalDate());
-                    tar.setEstado(rs.getString("estado"));
-//                    tar.setEquipoM(rs.getInt("idMiembroEq"));
+//                    tar.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+//                    tar.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
+//                    tar.setEstado(rs.getString("estado"));
+//                    EquipoMiembros em = EquipmData.obtenerMiembroEquipo(rs.getInt("idMiembroEq"));
+//                    tar.setEquipoM(em.getIdMiembroEq());
                                  
                     tarea.add(tar);
 
                 }      
                 ps.close();
             }catch (SQLException ex) {
-                JOptionPane.showInternalMessageDialog(null, "Error tareas "+ex.getMessage());
+                JOptionPane.showInternalMessageDialog(null, "Error al listar tareas "+ex.getMessage());
             }
             return tarea;
 
         }
     
-    public Tarea obtenerTarea(int idTarea) 
-        throws SQLException {
-    Tarea tarea = null;
-    String sql = "SELECT * FROM tarea WHERE idTarea = ?";
-    
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    
-    try {
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, idTarea);
-        rs = ps.executeQuery();
-        
-        if (rs.next()) {
-            tarea = new Tarea();
-            tarea.setIdTarea(rs.getInt("idTarea"));
-            tarea.setNombre(rs.getString("nombre"));
-            tarea.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
-            tarea.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
-            tarea.setEstado(rs.getString("estado"));
-            
-            int equipoMiembrosId = rs.getInt("equipoMiembrosId");
-            // Aquí debes obtener el objeto equipoMiembros correspondiente al ID
-            
-            EquipoMiembros equipoM = obtenerEquipoMiembros(equipoMiembrosId);
-            tarea.setEquipoM(equipoM);
-        }
-    } finally {
-        if (rs != null) {
-            rs.close();
-        }
-        if (ps != null) {
-            ps.close();
-        }
-    }
-    
-    return tarea;
-}
-
     public EquipoMiembros obtenerEquipoMiembros(int equipoMiembrosId) 
         throws SQLException {
         EquipoMiembros equipoM = null;
@@ -178,8 +143,10 @@ public class TareaData {
                 equipoM = new EquipoMiembros();
                 equipoM.setIdMiembroEq(rs.getInt("idMiembroEq"));
                 equipoM.setFechaIncorporacion(rs.getDate("fechaIncorporacion").toLocalDate());
-                equipoM.getEquipo().setIdEquipo(rs.getInt("idEquipo"));
-                equipoM.getMiembro().setIdMiembro(rs.getInt("idMiembro"));
+                Equipo eq = equipData.obtenerEquipo(rs.getInt("idEquipo"));
+                equipoM.setEquipo(eq.getIdEquipo());
+                Miembro miem = mData.obtenerMiembro(rs.getInt("idMiembro"));
+                equipoM.setMiembro(miem.getIdMiembro());
 
             }
         } finally {
@@ -194,5 +161,62 @@ public class TareaData {
         return equipoM;
     }
     
-    
+    public void actualizarEstado(String estado, int idTarea){
+        try {
+            String sql= "UPDATE tarea SET estado=? WHERE idTarea=?";
+            
+            PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           
+            ps.setString(1, estado);
+            ps.setInt(2, idTarea);
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Tarea actualizada");
+            ps.close();
+            
+            } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "La tarea no se pudo actualizar");
+            Logger.getLogger(TareaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
+
+
+//    public Tarea obtenerTarea(int idTarea) 
+//        throws SQLException {
+//    Tarea tarea = null;
+//    String sql = "SELECT * FROM tarea WHERE idTarea = ?";
+//    
+//    PreparedStatement ps = null;
+//    ResultSet rs = null;
+//    
+//    try {
+//        ps = con.prepareStatement(sql);
+//        ps.setInt(1, idTarea);
+//        rs = ps.executeQuery();
+//        
+//        if (rs.next()) {
+//            tarea = new Tarea();
+//            tarea.setIdTarea(rs.getInt("idTarea"));
+//            tarea.setNombre(rs.getString("nombre"));
+//            tarea.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+//            tarea.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
+//            tarea.setEstado(rs.getString("estado"));
+//            
+//            int equipoMiembrosId = rs.getInt("equipoMiembrosId");
+//            // Aquí debes obtener el objeto equipoMiembros correspondiente al ID
+//            
+//            EquipoMiembros equipoM = obtenerEquipoMiembros(equipoMiembrosId);
+//            tarea.setEquipoM();
+//        }
+//    } finally {
+//        if (rs != null) {
+//            rs.close();
+//        }
+//        if (ps != null) {
+//            ps.close();
+//        }
+//    }
+//    
+//    return tarea;
+//}
