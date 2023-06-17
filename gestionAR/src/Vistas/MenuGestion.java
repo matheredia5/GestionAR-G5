@@ -25,6 +25,7 @@ public class MenuGestion extends javax.swing.JFrame {
         jFormProyecto = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jFormTareas = new javax.swing.JMenuItem();
+        jFormEstado = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jFormEquipo = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -52,11 +53,11 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 642, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Proyectos");
@@ -80,6 +81,14 @@ public class MenuGestion extends javax.swing.JFrame {
             }
         });
         jMenu9.add(jFormTareas);
+
+        jFormEstado.setText("Actualizar Estado");
+        jFormEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormEstadoActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jFormEstado);
 
         jMenuBar1.add(jMenu9);
 
@@ -162,9 +171,16 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.moveToFront(vt);
     }//GEN-LAST:event_jFormTareasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jFormEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormEstadoActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaTareasEstado vte = new VistaTareasEstado();
+        vte.setVisible(true);
+        escritorio.add(vte);
+        escritorio.moveToFront(vte);
+    }//GEN-LAST:event_jFormEstadoActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -203,6 +219,7 @@ public class MenuGestion extends javax.swing.JFrame {
     private javax.swing.JMenuItem jFormComentarios;
     private javax.swing.JMenuItem jFormEquipo;
     private javax.swing.JMenuItem jFormEquipoMiembros;
+    private javax.swing.JMenuItem jFormEstado;
     private javax.swing.JMenuItem jFormMiembros;
     private javax.swing.JMenuItem jFormProyecto;
     private javax.swing.JMenuItem jFormTareas;

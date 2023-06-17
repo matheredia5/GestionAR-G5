@@ -8,12 +8,12 @@ public class Tarea {
     private String nombre;
     private LocalDate fechaCreacion;
     private LocalDate fechaCierre;
-    private boolean estado;
+    private String estado;
     private EquipoMiembros equipoM;
     private Proyecto proyecto;
     
 
-    public Tarea(int idTarea, String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, boolean estado, EquipoMiembros equipoM) {
+    public Tarea(int idTarea, String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, String estado, EquipoMiembros equipoM) {
         this.idTarea = idTarea;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
@@ -22,7 +22,7 @@ public class Tarea {
         this.equipoM = equipoM;
     }
 
-    public Tarea(String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, boolean estado, EquipoMiembros equipoM) {
+    public Tarea(String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, String estado, EquipoMiembros equipoM) {
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.fechaCierre = fechaCierre;
@@ -72,14 +72,6 @@ public class Tarea {
         this.fechaCierre = fechaCierre;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     public EquipoMiembros getEquipoM() {
         return equipoM;
     }
@@ -96,9 +88,19 @@ public class Tarea {
         this.proyecto = proyecto;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
+    
     @Override
     public String toString() {
-        return "Tarea{" + "idTarea=" + idTarea + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", equipoM=" + equipoM + '}';
+        return  idTarea + "," + nombre ;
     }
     
 }

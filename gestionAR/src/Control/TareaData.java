@@ -35,7 +35,7 @@ public class TareaData {
             ps.setString(1, tarea.getNombre());
             ps.setDate(2, Date.valueOf(tarea.getFechaCreacion()));
             ps.setDate(3, Date.valueOf(tarea.getFechaCierre()));
-            ps.setBoolean(4, tarea.isEstado());
+            ps.setString(4, tarea.getEstado());
             ps.setInt(5, tarea.getEquipoM().getIdMiembroEq());
             ps.executeUpdate();
             
@@ -63,7 +63,7 @@ public class TareaData {
             ps.setString(1, tarea.getNombre());
             ps.setDate(2, Date.valueOf( tarea.getFechaCreacion()));
             ps.setDate(3, Date.valueOf( tarea.getFechaCierre()));            
-            ps.setBoolean(4, tarea.isEstado());
+            ps.setString(4, tarea.getEstado());
             ps.setInt(5, tarea.getEquipoM().getIdMiembroEq());
             ps.setInt(6, tarea.getIdTarea());
             ps.executeUpdate();
@@ -108,7 +108,7 @@ public class TareaData {
                     tar.setNombre(rs.getString("nombre"));
                     tar.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
                     tar.setFechaCierre(rs.getDate("fechaNaCierre").toLocalDate());
-                    tar.setEstado(rs.getBoolean("estado"));
+                    tar.setEstado(rs.getString("estado"));
 //                    tar.setEquipoM(rs.getInt("idMiembroEq"));
                                  
                     tarea.add(tar);
@@ -141,7 +141,7 @@ public class TareaData {
             tarea.setNombre(rs.getString("nombre"));
             tarea.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
             tarea.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
-            tarea.setEstado(rs.getBoolean("estado"));
+            tarea.setEstado(rs.getString("estado"));
             
             int equipoMiembrosId = rs.getInt("equipoMiembrosId");
             // Aquí debes obtener el objeto equipoMiembros correspondiente al ID

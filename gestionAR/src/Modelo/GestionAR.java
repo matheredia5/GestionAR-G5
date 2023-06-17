@@ -32,7 +32,7 @@ public class GestionAR {
         EquipoMiembrosData em = new EquipoMiembrosData();
 //        em.crearEquipoMiembros(equipom);
 
-        Tarea tarea = new Tarea(7, "correcion", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), true, equipom);
+        Tarea tarea = new Tarea(7, "correcion", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), "completado", equipom);
         TareaData t = new TareaData();
 //        t.asignarTarea(tarea);
 
@@ -40,7 +40,7 @@ public class GestionAR {
         ComentariosData c = new ComentariosData();
 //        c.registrarComentario(com);
 
-        Tarea tar = new Tarea(7, "correcion completada", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), false, equipom);
+        Tarea tar = new Tarea(7, "correcion completada", LocalDate.of(2023, 5, 31), LocalDate.of(2023, 6, 30), "completado", equipom);
         TareaData ta = new TareaData();
 //        t.actualizarTarea(tar);
     }
