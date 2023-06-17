@@ -2,13 +2,14 @@
 package Vistas;
 
 import Control.TareaData;
+import Modelo.EquipoMiembros;
 import Modelo.Tarea;
 import java.time.LocalDate;
 import java.util.Calendar;
 
 
 public class VistaTareas extends javax.swing.JInternalFrame {
-    TareaData tareadata = new TareaData();
+    TareaData tareadat = new TareaData();
     
     public VistaTareas() {
         initComponents();
@@ -168,23 +169,16 @@ public class VistaTareas extends javax.swing.JInternalFrame {
         boolean estado = jcEstado.isSelected();
         int idME = Integer.parseInt(jtIdME.getText());
 
-        Tarea tar = new Tarea();
-        tar.setNombre(nombre);
-
         LocalDate fechaNacLocal = LocalDate.of(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH) + 1,
             fecha.get(Calendar.DAY_OF_MONTH));
-
-        tar.setFechaCreacion(fechaNacLocal);
-        
+      
         LocalDate fechaNacLoc = LocalDate.of(fech.get(Calendar.YEAR), fech.get(Calendar.MONTH) + 1,
             fech.get(Calendar.DAY_OF_MONTH));
-        
-        tar.setFechaCierre(fechaNacLoc);
 
-        tar.setEstado(estado);
-        tar.getEquipoM().setIdMiembroEq(idME);
+        EquipoMiembros equipM = new EquipoMiembros();
+        equipM.setIdMiembroEq(idME);
 
-        TareaData tareadat = new TareaData();
+        Tarea tar = new Tarea(nombre, fechaNacLocal, fechaNacLoc, estado, equipM);
         tareadat.asignarTarea(tar);
 
         limpiar();
