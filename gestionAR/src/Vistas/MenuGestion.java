@@ -26,6 +26,7 @@ public class MenuGestion extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jFormTareas = new javax.swing.JMenuItem();
         jFormEstado = new javax.swing.JMenuItem();
+        jFormAvance = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jFormEquipo = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -89,6 +90,14 @@ public class MenuGestion extends javax.swing.JFrame {
             }
         });
         jMenu9.add(jFormEstado);
+
+        jFormAvance.setText("Avance Tareas");
+        jFormAvance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormAvanceActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jFormAvance);
 
         jMenuBar1.add(jMenu9);
 
@@ -161,6 +170,16 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.moveToFront(ve);
     }//GEN-LAST:event_jFormEquipoActionPerformed
 
+    private void jFormEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormEstadoActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaTareasEstado vte = new VistaTareasEstado();
+        vte.setVisible(true);
+        escritorio.add(vte);
+        escritorio.moveToFront(vte);
+    }//GEN-LAST:event_jFormEstadoActionPerformed
+
     private void jFormTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormTareasActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
@@ -171,15 +190,15 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.moveToFront(vt);
     }//GEN-LAST:event_jFormTareasActionPerformed
 
-    private void jFormEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormEstadoActionPerformed
+    private void jFormAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormAvanceActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        VistaTareasEstado vte = new VistaTareasEstado();
-        vte.setVisible(true);
-        escritorio.add(vte);
-        escritorio.moveToFront(vte);
-    }//GEN-LAST:event_jFormEstadoActionPerformed
+        VistaAvanceTareas vat = new VistaAvanceTareas();
+        vat.setVisible(true);
+        escritorio.add(vat);
+        escritorio.moveToFront(vat);
+    }//GEN-LAST:event_jFormAvanceActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -216,6 +235,7 @@ public class MenuGestion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jFormAvance;
     private javax.swing.JMenuItem jFormComentarios;
     private javax.swing.JMenuItem jFormEquipo;
     private javax.swing.JMenuItem jFormEquipoMiembros;

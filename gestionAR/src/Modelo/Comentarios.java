@@ -49,12 +49,16 @@ public class Comentarios {
         this.fechaAvance = fechaAvance;
     }
 
+//    public int getTarea() {
+//        return tarea.getIdTarea();
+//    }
+    
     public Tarea getTarea() {
         return tarea;
     }
 
-    public void setTarea(Tarea tarea) {
-        this.tarea = tarea;
+    public void setTarea(int idTarea) {
+        this.tarea.setIdTarea(idTarea);
     }
 
     @Override

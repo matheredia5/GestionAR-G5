@@ -95,6 +95,38 @@ public class TareaData {
     }
 } 
     
+    public Tarea buscarTarea(int idTarea){
+        Tarea tarea = null;
+        String sql = "SELECT  nombre, fechaCreacion, fechaCierre, estado, equipoM FROM tarea WHERE idTarea = ? ";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idTarea);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                tarea=new Tarea();
+                tarea.setIdTarea(idTarea);
+                tarea.setNombre(rs.getString("nombre"));
+                tarea.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+                tarea.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
+                tarea.setEstado(rs.getString("estado"));
+                tarea.setEquipoM(rs.getInt("equipoM"));
+              
+               
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe la Tarea.");
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Tarea. "+ex.getMessage());
+        }
+
+        return tarea;
+    }
+    
     public List<Tarea> listarTareas(){
               List<Tarea> tarea = new ArrayList<>();    
 
@@ -180,43 +212,3 @@ public class TareaData {
         }
     }
 }
-
-
-//    public Tarea obtenerTarea(int idTarea) 
-//        throws SQLException {
-//    Tarea tarea = null;
-//    String sql = "SELECT * FROM tarea WHERE idTarea = ?";
-//    
-//    PreparedStatement ps = null;
-//    ResultSet rs = null;
-//    
-//    try {
-//        ps = con.prepareStatement(sql);
-//        ps.setInt(1, idTarea);
-//        rs = ps.executeQuery();
-//        
-//        if (rs.next()) {
-//            tarea = new Tarea();
-//            tarea.setIdTarea(rs.getInt("idTarea"));
-//            tarea.setNombre(rs.getString("nombre"));
-//            tarea.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
-//            tarea.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
-//            tarea.setEstado(rs.getString("estado"));
-//            
-//            int equipoMiembrosId = rs.getInt("equipoMiembrosId");
-//            // Aquí debes obtener el objeto equipoMiembros correspondiente al ID
-//            
-//            EquipoMiembros equipoM = obtenerEquipoMiembros(equipoMiembrosId);
-//            tarea.setEquipoM();
-//        }
-//    } finally {
-//        if (rs != null) {
-//            rs.close();
-//        }
-//        if (ps != null) {
-//            ps.close();
-//        }
-//    }
-//    
-//    return tarea;
-//}
