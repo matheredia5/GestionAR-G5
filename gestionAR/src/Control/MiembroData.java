@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -80,4 +82,65 @@ public class MiembroData {
     return miembro;
 }
 
+    public List<Miembro> listarMiembros(){
+              List<Miembro> miembro = new ArrayList<>();    
+
+            try {
+                String query = "SELECT idMiembro, dni, apellido, nombre, estado FROM miembro;";
+                PreparedStatement ps;
+                ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+
+                while(rs.next()){
+
+                    Miembro m = new Miembro();
+                    m.setIdMiembro(rs.getInt("idMiembro"));
+                    m.setDni(rs.getInt("dni"));
+                    m.setApellido(rs.getString("apellido"));
+                    m.setNombre(rs.getString("nombre"));
+                    m.setEstado(rs.getBoolean("estado"));
+                                    
+                                 
+                    miembro.add(m);
+
+                }      
+                ps.close();
+            }catch (SQLException ex) {
+                JOptionPane.showInternalMessageDialog(null, "Error al listar Miembros "+ex.getMessage());
+            }
+            return miembro;
+
+        }
+    
+    public List<Miembro> listarMiembrosPorEquipo(int idMiembroEquipo) {
+            List<Miembro> listaMiembros = new ArrayList<>();
+            
+            String sql = "SELECT m.idMiembro, m.DNI, m.Apellido, m.Nombre, m.Estado "
+                    + "FROM miembro m "
+                    + "INNER JOIN equipomiembros em ON m.idMiembro = em.idMiembro "
+                    + "WHERE em.idMiembroEq = ?";
+
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, idMiembroEquipo);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    int idMiembro = rs.getInt("idMiembro");
+                    int dni = rs.getInt("DNI");
+                    String apellido = rs.getString("Apellido");
+                    String nombre = rs.getString("Nombre");
+                    boolean estado = rs.getBoolean("estado");
+
+                    Miembro miembro = new Miembro(idMiembro, dni, apellido, nombre, estado);
+                    listaMiembros.add(miembro);
+                }
+
+                ps.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener los miembros por equipo: " + ex.getMessage());
+            }
+
+            return listaMiembros;
+        }
 }

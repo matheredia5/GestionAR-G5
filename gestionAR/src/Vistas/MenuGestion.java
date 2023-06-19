@@ -115,7 +115,12 @@ public class MenuGestion extends javax.swing.JFrame {
 
         jMenu7.setText("Equipo Miembros");
 
-        jFormEquipoMiembros.setText("FormularioEquipoMiembros");
+        jFormEquipoMiembros.setText("Informacion de equipos");
+        jFormEquipoMiembros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormEquipoMiembrosActionPerformed(evt);
+            }
+        });
         jMenu7.add(jFormEquipoMiembros);
 
         jMenuBar1.add(jMenu7);
@@ -199,6 +204,16 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.add(vat);
         escritorio.moveToFront(vat);
     }//GEN-LAST:event_jFormAvanceActionPerformed
+
+    private void jFormEquipoMiembrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormEquipoMiembrosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaInfoEquipo vie = new VistaInfoEquipo();
+        vie.setVisible(true);
+        escritorio.add(vie);
+        escritorio.moveToFront(vie);
+    }//GEN-LAST:event_jFormEquipoMiembrosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,33 +25,33 @@ public class ComentariosData {
         con= Conexion.getConexion();
     }
 
-    public void registrarComentario(Comentarios com){
+    public void registrarComentario(Comentarios com) {
         try {
-            String sql= "INSERT INTO comentarios(comentario, fechaAvance, idTarea) values(?,?,?)";
-            
-            PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            String sql = "INSERT INTO comentarios(comentario, fechaAvance, idTarea) VALUES (?, ?, ?)";
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, com.getComentario());
             ps.setDate(2, Date.valueOf(com.getFechaAvance()));
             ps.setInt(3, com.getTarea().getIdTarea());
             ps.executeUpdate();
-            
+
             ResultSet rs = ps.getGeneratedKeys();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 com.setIdComentario(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Comentario agregado.");
-            }else
+            } else {
                 System.out.println("El comentario no se pudo agregar");
-                
-             ps.close();
-            
+            }
+
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "El comentario no se pudo agregar");
             Logger.getLogger(ProyectoData.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+}
+
     public List<Comentarios> listarComentarios(){
               List<Comentarios> comentario = new ArrayList<>();    
 
@@ -103,6 +104,26 @@ public class ComentariosData {
     
     return comentarios;
 }
+    
+    public void actualizarComentario(String comentario, LocalDate fechaAvance, int idTarea){
+        try {
+            String sql= "UPDATE comentarios SET comentario=?, fechaAvance=? WHERE idTarea=?";
+            
+            PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           
+            ps.setString(1, comentario);
+            ps.setDate(2, Date.valueOf(fechaAvance));
+            ps.setInt(3, idTarea);
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Comentario actualizado");
+            ps.close();
+            
+            } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "El comentario no se pudo actualizar");
+            Logger.getLogger(TareaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
 

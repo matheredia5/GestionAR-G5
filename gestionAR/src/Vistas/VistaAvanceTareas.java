@@ -5,8 +5,11 @@ import Control.ComentariosData;
 import Control.TareaData;
 import Modelo.Comentarios;
 import Modelo.Tarea;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -146,16 +149,65 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
+        Tarea tareaSeleccionada = (Tarea) jcTareas.getSelectedItem();
+        int filaSeleccionada = jtComentarios.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila de la tabla.");
+            return;
+        } 
+
+        int idTarea = tareaSeleccionada.getIdTarea();
+        String nuevoComentario;
+        LocalDate nuevaFechaAvance;
+
+        try {
+            nuevoComentario = JOptionPane.showInputDialog("Ingrese el nuevo comentario:");
+            String nuevaFechaStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de avance (YYYY-MM-DD):");
+            nuevaFechaAvance = LocalDate.parse(nuevaFechaStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un comentario y una fecha válidos.");
+            return;
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha válida en el formato YYYY-MM-DD.");
+            return;
+        }
+
+        cData.actualizarComentario(nuevoComentario, nuevaFechaAvance, idTarea);
+        borrarFilas();
+        
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbComentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComentarActionPerformed
         // TODO add your handling code here:
+        Tarea tareaSeleccionada = (Tarea) jcTareas.getSelectedItem();
+
+        int idTarea = tareaSeleccionada.getIdTarea();
+        String nuevoComentario;
+        LocalDate nuevaFechaAvance;
+
+        try {
+            nuevoComentario = JOptionPane.showInputDialog("Ingrese el nuevo comentario:");
+            String nuevaFechaStr = JOptionPane.showInputDialog("Ingrese la nueva fecha de avance (YYYY-MM-DD):");
+            nuevaFechaAvance = LocalDate.parse(nuevaFechaStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un comentario y una fecha válidos.");
+            return;
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha válida en el formato YYYY-MM-DD.");
+            return;
+        }
+
+        Comentarios comen = new Comentarios(nuevoComentario, nuevaFechaAvance, idTarea);
+        cData.registrarComentario(comen);
+        borrarFilas();
     }//GEN-LAST:event_jbComentarActionPerformed
 
     private void jcTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTareasActionPerformed
         // TODO add your handling code here:
         llenarTabla();
     }//GEN-LAST:event_jcTareasActionPerformed
+    
     private void cargarTareas() {
         List<Tarea> tareas=tData.listarTareas();
         for(Tarea tar:tareas){
@@ -163,6 +215,7 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
         }       
    
     }
+    
     public void limpiar(){
         jcTareas.setSelectedItem(null);
        
@@ -172,7 +225,6 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
         ArrayList<Object> titulos=new ArrayList<>();
         titulos.add("Comentario");
         titulos.add("FechaAvance");
-//        titulos.add("idTarea");
         for(Object tit:titulos){
         
             modelo.addColumn(tit);
@@ -192,14 +244,12 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
         Object[] fila = {
             comentario.getComentario(),
             comentario.getFechaAvance(),
-//            comentario.getTarea(),
         };
         modelo.addRow(fila);
     }
 
     jtComentarios.setModel(modelo);
 }
-
     
     private void borrarFilas(){
         int filas=modelo.getRowCount()-1;
@@ -208,6 +258,7 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLTareas;
     private javax.swing.JLabel jLabel1;

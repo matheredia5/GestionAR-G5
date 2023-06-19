@@ -141,11 +141,6 @@ public class TareaData {
                     Tarea tar = new Tarea();
                     tar.setIdTarea(rs.getInt("idTarea"));
                     tar.setNombre(rs.getString("nombre"));
-//                    tar.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
-//                    tar.setFechaCierre(rs.getDate("fechaCierre").toLocalDate());
-//                    tar.setEstado(rs.getString("estado"));
-//                    EquipoMiembros em = EquipmData.obtenerMiembroEquipo(rs.getInt("idMiembroEq"));
-//                    tar.setEquipoM(em.getIdMiembroEq());
                                  
                     tarea.add(tar);
 

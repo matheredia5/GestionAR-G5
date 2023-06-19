@@ -60,7 +60,7 @@ public class EquipoMiembros {
    
     @Override
     public String toString() {
-        return "equipoMiembros{" + "idMiembroEq=" + idMiembroEq + ", fechaIncorporacion=" + fechaIncorporacion + ", equipo=" + equipo + ", miembro=" + miembro + '}';
+        return "{ " + idMiembroEq + ", Incorporacion: " + fechaIncorporacion +" }";
     }
     
 }
