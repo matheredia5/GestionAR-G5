@@ -143,4 +143,36 @@ public class MiembroData {
 
             return listaMiembros;
         }
+    
+    public List<Miembro> obtenerMiembrosProyecto(int idProyecto) {
+        List<Miembro> miembros = new ArrayList<>();
+
+        try {
+            String sql = "SELECT m.idMiembro, m.nombre, m.estado " +
+                         "FROM miembro m " +
+                         "INNER JOIN equipomiembros em ON em.idMiembro = m.idMiembro " +
+                         "INNER JOIN equipo e ON em.idEquipo = e.idEquipo " +
+                         "WHERE e.idProyecto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProyecto);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Miembro miembro = new Miembro();
+                miembro.setIdMiembro(rs.getInt("idMiembro"));
+                miembro.setNombre(rs.getString("nombre"));
+                miembro.setEstado(rs.getBoolean("estado"));
+                miembros.add(miembro);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los miembros del proyecto");
+        }
+
+        return miembros;
+    }
+
+
+    
 }

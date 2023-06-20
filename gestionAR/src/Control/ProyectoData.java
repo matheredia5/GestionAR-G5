@@ -50,7 +50,7 @@ public class ProyectoData {
         }
     }
     
-     public List<Proyecto> listarTareas(){
+     public List<Proyecto> listarProyectos(){
               List<Proyecto> proyectos = new ArrayList<>();    
 
             try {

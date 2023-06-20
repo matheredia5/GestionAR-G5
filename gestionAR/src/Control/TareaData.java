@@ -206,4 +206,35 @@ public class TareaData {
             Logger.getLogger(TareaData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public List<Tarea> obtenerTareasProyecto(int idProyecto) {
+        List<Tarea> tareas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT t.idTarea, t.nombre, t.estado " +
+                         "FROM tarea t " +
+                         "INNER JOIN equipomiembros em ON em.idMiembroEq = t.idMiembroEq " +
+                         "INNER JOIN equipo e ON em.idEquipo = e.idEquipo " +
+                         "WHERE e.idProyecto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProyecto);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Tarea tarea = new Tarea();
+                tarea.setIdTarea(rs.getInt("idTarea"));
+                tarea.setNombre(rs.getString("nombre"));
+                tarea.setEstado(rs.getString("estado"));
+                tareas.add(tarea);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener las tareas del proyecto");
+        }
+
+        return tareas;
+    }
+
+    
 }

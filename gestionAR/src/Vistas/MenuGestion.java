@@ -23,6 +23,7 @@ public class MenuGestion extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jFormProyecto = new javax.swing.JMenuItem();
+        jFormProyectosTareas = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jFormTareas = new javax.swing.JMenuItem();
         jFormEstado = new javax.swing.JMenuItem();
@@ -31,10 +32,6 @@ public class MenuGestion extends javax.swing.JFrame {
         jFormEquipo = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jFormEquipoMiembros = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jFormMiembros = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
-        jFormComentarios = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -70,6 +67,14 @@ public class MenuGestion extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jFormProyecto);
+
+        jFormProyectosTareas.setText("Proyectos y Tareas");
+        jFormProyectosTareas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormProyectosTareasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jFormProyectosTareas);
 
         jMenuBar1.add(jMenu1);
 
@@ -124,20 +129,6 @@ public class MenuGestion extends javax.swing.JFrame {
         jMenu7.add(jFormEquipoMiembros);
 
         jMenuBar1.add(jMenu7);
-
-        jMenu8.setText("Miembros");
-
-        jFormMiembros.setText("Formulario Miembros");
-        jMenu8.add(jFormMiembros);
-
-        jMenuBar1.add(jMenu8);
-
-        jMenu10.setText("Comentarios");
-
-        jFormComentarios.setText("Formulario Comentarios");
-        jMenu10.add(jFormComentarios);
-
-        jMenuBar1.add(jMenu10);
 
         setJMenuBar(jMenuBar1);
 
@@ -215,6 +206,16 @@ public class MenuGestion extends javax.swing.JFrame {
         escritorio.moveToFront(vie);
     }//GEN-LAST:event_jFormEquipoMiembrosActionPerformed
 
+    private void jFormProyectosTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormProyectosTareasActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaProyectoTareas vpt = new VistaProyectoTareas();
+        vpt.setVisible(true);
+        escritorio.add(vpt);
+        escritorio.moveToFront(vpt);
+    }//GEN-LAST:event_jFormProyectosTareasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -251,22 +252,19 @@ public class MenuGestion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem jFormAvance;
-    private javax.swing.JMenuItem jFormComentarios;
     private javax.swing.JMenuItem jFormEquipo;
     private javax.swing.JMenuItem jFormEquipoMiembros;
     private javax.swing.JMenuItem jFormEstado;
-    private javax.swing.JMenuItem jFormMiembros;
     private javax.swing.JMenuItem jFormProyecto;
+    private javax.swing.JMenuItem jFormProyectosTareas;
     private javax.swing.JMenuItem jFormTareas;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;

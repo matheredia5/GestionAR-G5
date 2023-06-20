@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class VistaAvanceTareas extends javax.swing.JInternalFrame {
     private TareaData tData=new TareaData();
     private ComentariosData cData = new ComentariosData();
-     private DefaultTableModel modelo=new DefaultTableModel(){
+    private DefaultTableModel modelo=new DefaultTableModel(){
     
         @Override
         public boolean isCellEditable(int row,int colum){
