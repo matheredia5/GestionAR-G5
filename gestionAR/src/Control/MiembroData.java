@@ -112,7 +112,7 @@ public class MiembroData {
 
         }
     
-    public List<Miembro> listarMiembrosPorEquipo(int idMiembroEquipo) {
+    public List<Miembro> listarMiembrosPorEquip(int idMiembroEquipo) {
             List<Miembro> listaMiembros = new ArrayList<>();
             
             String sql = "SELECT m.idMiembro, m.DNI, m.Apellido, m.Nombre, m.Estado "
@@ -172,6 +172,38 @@ public class MiembroData {
 
         return miembros;
     }
+
+    public List<Miembro> listarMiembrosPorEquipo(int idEquipo) {
+    List<Miembro> listaMiembros = new ArrayList<>();
+    
+    String sql = "SELECT m.idMiembro, m.DNI, m.Apellido, m.Nombre, m.Estado "
+            + "FROM miembro m "
+            + "INNER JOIN equipomiembros me ON m.idMiembro = me.idMiembro "
+            + "WHERE me.idEquipo = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idEquipo);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idMiembro = rs.getInt("idMiembro");
+            int dni = rs.getInt("DNI");
+            String apellido = rs.getString("Apellido");
+            String nombre = rs.getString("Nombre");
+            boolean estado = rs.getBoolean("estado");
+
+            Miembro miembro = new Miembro(idMiembro, dni, apellido, nombre, estado);
+            listaMiembros.add(miembro);
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener los miembros por equipo: " + ex.getMessage());
+    }
+
+    return listaMiembros;
+}
 
 
     

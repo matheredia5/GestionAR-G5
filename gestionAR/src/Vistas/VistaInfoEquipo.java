@@ -1,8 +1,10 @@
 
 package Vistas;
 
+import Control.EquipoData;
 import Control.EquipoMiembrosData;
 import Control.MiembroData;
+import Modelo.Equipo;
 import Modelo.EquipoMiembros;
 import Modelo.Miembro;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class VistaInfoEquipo extends javax.swing.JInternalFrame {
     private EquipoMiembrosData emData=new EquipoMiembrosData();
     private MiembroData mData=new MiembroData();
+    private EquipoData eData = new EquipoData();
     private DefaultTableModel modelo=new DefaultTableModel(){
     
         @Override
@@ -127,8 +130,8 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcMiembroEquipoActionPerformed
 
     private void cargarEquipoMiembros() {
-         List<EquipoMiembros> equipoM=emData.listarEquipoMiembros();
-        for(EquipoMiembros em:equipoM){
+         List<Equipo> equipo=eData.listarEquipos();
+        for(Equipo em:equipo){
             jcMiembroEquipo.addItem(em);
         }       
    
@@ -150,10 +153,10 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
     }
        
     private void llenarTabla() {
-      EquipoMiembros eqmSeleccionada = (EquipoMiembros) jcMiembroEquipo.getSelectedItem();   
+      Equipo eqmSeleccionada = (Equipo) jcMiembroEquipo.getSelectedItem();   
         modelo.setRowCount(0);
        
-        List<Miembro> lista = mData.listarMiembrosPorEquipo(eqmSeleccionada.getIdMiembroEq());
+        List<Miembro> lista = mData.listarMiembrosPorEquipo(eqmSeleccionada.getIdEquipo());
 
         for (Miembro miembro : lista) {
             Object[] fila = {
@@ -176,6 +179,6 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<EquipoMiembros> jcMiembroEquipo;
+    private javax.swing.JComboBox<Equipo> jcMiembroEquipo;
     // End of variables declaration//GEN-END:variables
 }
