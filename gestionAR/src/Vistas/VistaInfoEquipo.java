@@ -17,7 +17,7 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
     
         @Override
         public boolean isCellEditable(int row,int colum){
-            if(colum==0||colum==1||colum==2){
+            if(colum==0||colum==1||colum==2||colum==3||colum==4){
                 return false;
             }else{
                 return true;
@@ -43,7 +43,8 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
         jTable = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Informacion Del Equipo");
 
         jLabel2.setText("ID Miembro Equipo:");
@@ -107,7 +108,7 @@ public class VistaInfoEquipo extends javax.swing.JInternalFrame {
                     .addComponent(jcMiembroEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addGap(31, 31, 31))
         );

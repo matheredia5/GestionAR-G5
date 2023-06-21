@@ -28,8 +28,8 @@ public class Equipo {
     public Equipo() {
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public int getProyecto() {
+        return proyecto.getIdProyecto();
     }
 
     public void setProyecto(Proyecto proyecto) {
@@ -70,7 +70,7 @@ public class Equipo {
 
     @Override
     public String toString() {
-        return "Equipo{" + "proyecto=" + proyecto + ", idEquipo=" + idEquipo + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + '}';
+        return  idEquipo + ", " + nombre ;
     }
    
 }

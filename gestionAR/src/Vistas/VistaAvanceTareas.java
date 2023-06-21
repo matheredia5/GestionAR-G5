@@ -48,10 +48,10 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
         jbComentar = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 3, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Avance de Tareas");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLTareas.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLTareas.setText("Tareas:");
@@ -131,7 +131,7 @@ public class VistaAvanceTareas extends javax.swing.JInternalFrame {
                     .addComponent(jcTareas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbActualizar)
                     .addComponent(jbSalir)

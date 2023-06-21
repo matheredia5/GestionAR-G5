@@ -52,7 +52,8 @@ public class VistaProyectoTareas extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Consultar Proyectos y Tareas");
 
         jLabel2.setText("Proyectos:");
@@ -114,7 +115,7 @@ public class VistaProyectoTareas extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
+                        .addGap(118, 118, 118)
                         .addComponent(jLabel1)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -135,7 +136,7 @@ public class VistaProyectoTareas extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jSalir)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,9 +170,6 @@ public class VistaProyectoTareas extends javax.swing.JInternalFrame {
         jrbTareas.setSelected(false);
     }//GEN-LAST:event_jcProyectosActionPerformed
 
-
-    
-    
     private void cargarProyectos() {
         List<Proyecto> proy=pData.listarProyectos();
         for(Proyecto pr:proy){

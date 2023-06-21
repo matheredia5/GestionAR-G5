@@ -40,7 +40,7 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jProyectos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Proyectos"/>
           </Properties>
@@ -63,14 +63,29 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu9">
+        <Menu class="javax.swing.JMenu" name="jMiembros">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Miembros"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jVistaMiembros">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar Miembros"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jVistaMiembrosActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jTareas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tareas"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jFormTareas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Formulario Tareas"/>
+                <Property name="text" type="java.lang.String" value="Asignar Tareas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormTareasActionPerformed"/>
@@ -94,7 +109,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jEquipo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Equipo"/>
           </Properties>
@@ -109,7 +124,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu7">
+        <Menu class="javax.swing.JMenu" name="jEquipoMiembros">
           <Properties>
             <Property name="text" type="java.lang.String" value="Equipo Miembros"/>
           </Properties>
@@ -120,6 +135,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormEquipoMiembrosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jAgregarMiembroEq">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar Miembro Equipo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAgregarMiembroEqActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -161,6 +184,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JDesktopPane" name="escritorio">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="33" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">

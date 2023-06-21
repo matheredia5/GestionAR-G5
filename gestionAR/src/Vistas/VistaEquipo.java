@@ -62,7 +62,8 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Formulario Equipo");
 
@@ -78,9 +79,6 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -100,7 +98,10 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbSalir))
                             .addComponent(jdFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel1)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,18 +157,16 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         Calendar fecha= jdFechaCreacion.getCalendar();
         boolean estado = jcEstado.isSelected();
 
-        Equipo equip = new Equipo();
-        equip.getProyecto().setIdProyecto(idproy);
-        equip.setNombre(nombre);
 
         LocalDate fechaNacLocal = LocalDate.of(fecha.get(Calendar.YEAR), fecha.get(Calendar.MONTH) + 1,
             fecha.get(Calendar.DAY_OF_MONTH));
 
-        equip.setFechaCreacion(fechaNacLocal);
-        equip.setEstado(estado);
-
-        EquipoData equipodata = new EquipoData();
-        equipodata.crearEquipo(equip);
+        
+        Proyecto proy = new Proyecto();
+        proy.setIdProyecto(idproy);
+        
+        Equipo equipo = new Equipo(proy, nombre, fechaNacLocal, estado);
+        equipoData.crearEquipo(equipo);
 
         limpiar();
     }//GEN-LAST:event_jbAgregarActionPerformed

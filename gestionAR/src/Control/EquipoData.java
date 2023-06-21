@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,7 +30,7 @@ public class EquipoData {
             
             PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                      
-            ps.setInt(1, equipo.getProyecto().getIdProyecto());
+            ps.setInt(1, equipo.getProyecto());
             ps.setString(2, equipo.getNombre());
             ps.setDate(3, Date.valueOf(equipo.getFechaCreacion()));
             ps.setBoolean(4, equipo.isEstado());
@@ -83,5 +85,35 @@ public class EquipoData {
     return equipo;
 }
 
+    public List<Equipo> listarEquipos() {
+        List<Equipo> equipo = new ArrayList<>();    
 
-}
+            try {
+                String query = "SELECT idEquipo, nombre FROM equipo;";
+                PreparedStatement ps;
+                ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+
+                while(rs.next()){
+
+                    Equipo e = new Equipo();
+                    e.setIdEquipo(rs.getInt("idEquipo"));               
+                    e.setNombre(rs.getString("nombre"));                  
+                                    
+                                 
+                    equipo.add(e);
+
+                }      
+                ps.close();
+            }catch (SQLException ex) {
+                JOptionPane.showInternalMessageDialog(null, "Error al listar Equipo "+ex.getMessage());
+            }
+            return equipo;
+
+        }
+        
+        
+    }
+
+
+

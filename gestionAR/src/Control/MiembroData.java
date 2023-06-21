@@ -66,7 +66,7 @@ public class MiembroData {
             miembro = new Miembro();
             miembro.setIdMiembro(rs.getInt("idMiembro"));
             miembro.setNombre(rs.getString("nombre"));
-            // Establecer el resto de propiedades del miembro según la estructura de la tabla
+         
         }
     } catch (SQLException ex) {
         Logger.getLogger(MiembroData.class.getName()).log(Level.SEVERE, null, ex);
